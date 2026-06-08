@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oscar ❤️ Omar</title>
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:linear-gradient(
+        to bottom,
+        #4db8ff,
+        #87ceeb
+    );
+    color:white;
+    overflow-x:hidden;
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.hero h1{
+    font-size:3rem;
+    text-shadow:3px 3px 8px rgba(0,0,0,.35);
+}
+
+.hero p{
+    font-size:1.2rem;
+    text-shadow:2px 2px 4px rgba(0,0,0,.4);
+}
+
+/* NUBES */
+
+.cloud{
+    position:fixed;
+    background:white;
+    width:150px;
+    height:50px;
+    border-radius:50px;
+    opacity:.85;
+    z-index:-1;
+}
+
+.cloud:before{
+    content:'';
+    position:absolute;
+    width:70px;
+    height:70px;
+    background:white;
+    border-radius:50%;
+    top:-30px;
+    left:20px;
+}
+
+.cloud1{
+    top:80px;
+    animation:move 40s linear infinite;
+}
+
+.cloud2{
+    top:250px;
+    animation:move 60s linear infinite;
+}
+
+.cloud3{
+    top:450px;
+    animation:move 50s linear infinite;
+}
+
+@keyframes move{
+    from{
+        transform:translateX(-300px);
+    }
+
+    to{
+        transform:translateX(calc(100vw + 300px));
+    }
+}
+
+/* CONTADOR */
+
+#contador{
+    margin-top:20px;
+    padding:15px 25px;
+    border-radius:20px;
+    background:rgba(0,0,0,.25);
+    backdrop-filter:blur(10px);
+    font-weight:bold;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+/* CARRUSEL */
+
+.slider{
+    width:90%;
+    max-width:900px;
+    height:600px;
+    margin:auto;
+    background:white;
+    padding:10px;
+    border-radius:25px;
+    overflow:hidden;
+    box-shadow:0 15px 30px rgba(0,0,0,.25);
+}
+
+.stories{
+    display:flex;
+    gap:5px;
+    margin-bottom:10px;
+}
+
+.story{
+    flex:1;
+    height:5px;
+    background:#d9d9d9;
+    border-radius:50px;
+}
+
+.story.active{
+    background:#5fd35f;
+}
+
+.slide{
+    width:100%;
+    height:560px;
+    object-fit:cover;
+    display:none;
+    border-radius:20px;
+}
+
+.slide.active{
+    display:block;
+}
+
+/* TARJETAS WOODY */
+
+.card{
+    max-width:900px;
+    margin:40px auto;
+    background:#ffd54f;
+    color:#333;
+    padding:30px;
+    border-radius:25px;
+    border:4px solid white;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+.card h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#8b4513;
+}
+
+.card p,
+.card li{
+    line-height:1.8;
+    color:#333;
+}
+
+/* BOTONES JESSIE */
+
+.btn{
+    padding:14px 28px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    margin:10px;
+    background:#e53935;
+    color:white;
+    font-weight:bold;
+    transition:.3s;
+    box-shadow:0 5px 15px rgba(0,0,0,.25);
+}
+
+.btn:hover{
+    transform:translateY(-3px) scale(1.05);
+}
+
+/* TEXTO BOTON TE AMO */
+
+#loveText{
+    margin-top:15px;
+    font-size:1.3rem;
+    font-weight:bold;
+    color:white;
+    text-shadow:2px 2px 4px rgba(0,0,0,.4);
+}
+
+/* SECCIONES */
+
+section{
+    padding:20px;
+}
+
+/* CORAZONES */
+
+.corazon{
+    position:fixed;
+    top:-20px;
+    pointer-events:none;
+    animation:caer linear forwards;
+}
+
+@keyframes caer{
+    to{
+        transform:translateY(110vh);
+    }
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:50px 20px;
+    text-shadow:2px 2px 4px rgba(0,0,0,.4);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    .hero h1{
+        font-size:2.2rem;
+    }
+
+    .slider{
+        height:400px;
+    }
+
+    .slide{
+        height:360px;
+    }
+
+    .card{
+        margin:20px;
+        padding:20px;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+<div class="cloud cloud3"></div>
+
+<div class="hero">
+<h1>❤️ Oscar & Omar ❤️</h1>
+<p>Juntos oficialmente desde el 3 de junio de 2026</p>
+<button class="btn" onclick="toggleMusic()">🎵 Da click aquí para escuchar tú canción mi chaparrito</button>
+<div id="contador"></div>
+<audio id="music" loop>
+<source src="Bad Bunny (ft. Bomba Estéreo) - Ojitos Lindos (360° Visualizer) _ Un Verano Sin Ti - (320 Kbps).mp3" type="audio/mpeg">
+</audio>
+</div>
+
+<div class="slider">
+<div class="stories">
+<div class="story active"></div><div class="story"></div><div class="story"></div>
+<div class="story"></div><div class="story"></div><div class="story"></div>
+</div>
+<img src="Foto1.jpeg" class="slide active">
+<img src="Foto2.jpeg" class="slide">
+<img src="Foto3.jpeg" class="slide">
+<img src="Foto4.jpeg" class="slide">
+<img src="Foto5.jpeg" class="slide">
+<img src="Foto6.jpeg" class="slide">
+</div>
+
+<section><div class="card">
+<h2>💌 Para Omar</h2>
+
+<p>
+
+Mi amor,
+
+No sé si alguna vez llegaré a encontrar las palabras perfectas para describir lo mucho que significas para mí.
+
+Desde que llegaste a mi vida, todo tiene más color, más emoción y más sentido.
+
+Gracias por cada abrazo, por cada sonrisa, por cada conversación y por cada momento compartido.
+
+Gracias por estar conmigo en los días buenos y en los complicados.
+
+Gracias por hacerme sentir querido.
+
+Quiero seguir creando recuerdos contigo, viajando, riendo, tomándonos fotos y viviendo aventuras.
+
+Y si algún día olvidas cuánto te amo, vuelve a esta página y recuerda que alguien pensó en ti mientras escribía cada línea.
+
+❤️
+
+Te amo muchísimo.
+
+<br>   >>>>>>>> Oscar <<<<<<<<<<<
+
+</p>
+
+</div></section>
+
+<section><div class="card">
+<h2>🌹 Un Poema Para Ti</h2>
+<p>
+
+No sé cuántas estrellas iluminan el cielo,
+
+pero ninguna brilla tanto como tus ojos.
+
+No sé cuántos caminos existen,
+
+pero mi favorito siempre será el que me lleva a ti.
+
+No sé cuántos años nos esperan,
+
+pero quiero vivirlos todos contigo.
+
+Porque mi lugar favorito no es un lugar.
+
+Eres tú.
+
+❤️
+</p>
+</div></section>
+
+<div class="card">
+
+<h2>💖 Razones Por Las Que Te Amo</h2>
+
+<ul>
+
+<li>Porque me haces sonreír.</li>
+<li>Porque me haces sentir seguro.</li>
+<li>Porque siempre estás para mí.</li>
+<li>Porque me haces feliz.</li>
+<li>Porque compartimos aventuras increíbles.</li>
+<li>Porque me encanta pasar tiempo contigo.</li>
+<li>Porque eres mi persona favorita.</li>
+<li>Porque me eliges cada día.</li>
+<li>Porque haces especiales los momentos simples.</li>
+<li>Porque eres Omar. ❤️</li>
+
+</ul>
+
+<section style="text-align:center">
+<button class="btn" id="loveBtn">❤️ Da click aquí las veces que quieras para saber cuanto te amo.</button>
+<p id="loveText"></p>
+</section>
+
+<script>
+function toggleMusic(){const m=document.getElementById('music');m.paused?m.play():m.pause();}
+
+function actualizar(){
+const inicio=new Date("2026-06-03T00:00:00");
+const ahora=new Date();
+let d=Math.floor((ahora-inicio)/1000);
+let dias=Math.floor(d/86400);d%=86400;
+let horas=Math.floor(d/3600);d%=3600;
+let min=Math.floor(d/60);let seg=d%60;
+document.getElementById('contador').innerHTML=`⏳ ${dias} días ${horas} horas ${min} minutos ${seg} segundos`;
+}
+setInterval(actualizar,1000);actualizar();
+
+let actual=0;
+const slides=document.querySelectorAll('.slide');
+const stories=document.querySelectorAll('.story');
+setInterval(()=>{
+slides[actual].classList.remove('active');
+stories[actual].classList.remove('active');
+actual=(actual+1)%slides.length;
+slides[actual].classList.add('active');
+stories[actual].classList.add('active');
+},1500);
+
+const mensajes=[
+"Más que todas las estrellas ❤️",
+"Más que ayer y menos que mañana ❤️",
+"Hasta el infinito... y más allá. 🚀💚",
+"Muchísimo ❤️",
+"Lo suficiente para desvelarme haciendote este detalle mi vida ❤️"
+];
+document.getElementById('loveBtn').onclick=()=>{
+document.getElementById('loveText').innerHTML=mensajes[Math.floor(Math.random()*mensajes.length)];
+};
+
+function crearCorazon(){
+const c=document.createElement('div');
+c.innerHTML='❤️';
+c.className='corazon';
+c.style.left=Math.random()*100+'vw';
+c.style.fontSize=(Math.random()*25+15)+'px';
+c.style.animationDuration=(Math.random()*5+5)+'s';
+document.body.appendChild(c);
+setTimeout(()=>c.remove(),10000);
+}
+setInterval(crearCorazon,250);
+
+</script>
+</body>
+</html>
