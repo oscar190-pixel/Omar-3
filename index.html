@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oscar ❤️ Omar</title>
-    <!-- Importación de Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Poppins:wght@200;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -14,8 +13,8 @@
             --text-muted: #d1d5db;
             --primary-neon: #ff6bdf;
             --secondary-neon: #4deeea;
-            --glass-bg: rgba(255, 255, 255, 0.04);
-            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-bg: rgba(15, 23, 42, 0.65); /* Fondo oscuro de respaldo */
+            --glass-border: rgba(255, 255, 255, 0.12);
             --font-heading: 'Montserrat', sans-serif;
             --font-body: 'Poppins', sans-serif;
         }
@@ -128,7 +127,7 @@
         #contador {
             padding: 15px 35px;
             border-radius: 50px;
-            background: var(--glass-bg);
+            background: rgba(15, 23, 42, 0.6);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
@@ -155,7 +154,7 @@
             max-width: 900px;
             height: 600px;
             position: relative;
-            background: var(--glass-bg);
+            background: rgba(15, 23, 42, 0.5);
             border-radius: 30px;
             overflow: hidden;
             border: 1px solid var(--glass-border);
@@ -232,7 +231,7 @@
         .slider-nav.prev { left: 20px; }
         .slider-nav.next { right: 20px; }
 
-        /* --- TARJETAS GLASSMORPHISM --- */
+        /* --- TARJETAS GLASSMORPHISM CORREGIDAS PARA MÓVIL --- */
         section {
             padding: 40px 20px;
             display: flex;
@@ -242,13 +241,13 @@
         .card {
             max-width: 800px;
             width: 100%;
-            background: var(--glass-bg);
+            background: var(--glass-bg); /* Respaldo seguro oscuro */
             backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px); /* Compatible con iOS/Safari */
             padding: 40px;
             border-radius: 30px;
             border: 1px solid var(--glass-border);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             position: relative;
             overflow: hidden;
         }
@@ -276,12 +275,12 @@
             text-shadow: 0 0 15px rgba(255, 107, 223, 0.5);
         }
 
-        .card p, .card li { font-size: 1.05rem; line-height: 1.9; color: var(--text-muted); margin-bottom: 20px; font-weight: 300; }
+        .card p, .card li { font-size: 1.05rem; line-height: 1.9; color: var(--text-main); margin-bottom: 20px; font-weight: 300; }
         .card ul { list-style: none; padding-left: 20px; }
         .card li { position: relative; margin-bottom: 15px; }
         .card li::before { content: '❤️'; position: absolute; left: -25px; font-size: 0.8rem; }
 
-        /* --- INTERFAZ DINÁMICA DE PREGUNTAS (VISTA DINÁMICA) --- */
+        /* --- SECCIÓN INTERACTIVA DE PREGUNTAS (CRISTAL OSCURO COMPATIBLE) --- */
         .quiz-title-box {
             text-align: center;
             padding: 40px 20px;
@@ -298,11 +297,11 @@
         .game-card {
             max-width: 650px;
             margin: 0 auto 40px auto;
-            background: rgba(255,255,255,0.03);
+            background: rgba(10, 14, 23, 0.8); /* Forzado oscuro para evitar bug blanco en móviles */
             border: 1px solid var(--glass-border);
             border-radius: 25px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .game-question {
@@ -313,6 +312,7 @@
             margin-bottom: 20px;
             border-left: 3px solid var(--primary-neon);
             padding-left: 15px;
+            line-height: 1.5;
         }
 
         .game-options-grid {
@@ -323,8 +323,8 @@
         }
 
         .option-label {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             padding: 14px 20px;
             border-radius: 15px;
             cursor: pointer;
@@ -332,14 +332,13 @@
             align-items: center;
             gap: 12px;
             font-size: 1rem;
-            color: var(--text-muted);
+            color: #ffffff; /* Letras totalmente blancas nítidas */
             transition: all 0.2s;
         }
 
         .option-label:hover {
-            background: rgba(255,255,255,0.1);
-            color: #fff;
-            border-color: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
         }
 
         .option-label input[type="radio"] {
@@ -348,17 +347,16 @@
             height: 18px;
         }
 
-        /* Input especial de texto libre */
         .custom-input-container {
             margin-top: 15px;
-            display: none; /* Se activa por JS */
+            display: none;
             animation: fadeInShort 0.3s ease;
         }
 
         .custom-textarea {
             width: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 12px;
             padding: 12px;
             color: #fff;
@@ -376,22 +374,21 @@
 
         @keyframes fadeInShort { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Contenedor de respuestas guardadas */
         .saved-results-box {
-            background: rgba(0,0,0,0.3);
+            background: rgba(10, 14, 23, 0.9);
             border-radius: 20px;
-            padding: 20px;
+            padding: 25px;
             margin-top: 20px;
             display: none;
         }
 
         .saved-item {
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding: 14px 0;
         }
         .saved-item:last-child { border: none; }
-        .saved-q { font-weight: 600; color: var(--secondary-neon); font-size: 0.95rem; }
-        .saved-a { color: var(--text-muted); font-style: italic; font-size: 0.95rem; margin-top: 3px; }
+        .saved-q { font-weight: 600; color: var(--secondary-neon); font-size: 1rem; }
+        .saved-a { color: var(--text-muted); font-style: italic; font-size: 0.95rem; margin-top: 5px; }
 
         /* --- BOTONES MODERNOS --- */
         .btn {
@@ -403,12 +400,11 @@
             font-weight: 700;
             font-size: 1rem;
             letter-spacing: 1px;
-            transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            z-index: 1;
+            transition: all 0.3s ease;
         }
 
         .btn-music { background: transparent; color: var(--secondary-neon); border: 2px solid var(--secondary-neon); box-shadow: 0 0 15px rgba(77, 238, 234, 0.3); margin-bottom: 20px; }
@@ -451,17 +447,15 @@
 </head>
 <body>
 
-    <!-- Fondo de estrellas globales -->
     <div id="glitch-stars"></div>
 
-    <!-- ================= VISTA 1: PÁGINA PRINCIPAL ROMÁNTICA ================= -->
     <div id="main-page" class="page active">
         <div class="hero">
             <h1>❤️ Oscar & Omar ❤️</h1>
             <p>Juntos oficialmente desde el 3 de junio de 2026</p>
             
             <button class="btn btn-music" onclick="toggleMusic()">
-                <span id="musicStatus">🎵 Da click aquí para escuchar nuestra canción de amor</span>
+                <span id="musicStatus">🎵 Da click aquí para escuchar tu canción, mi chaparrito</span>
             </button>
             
             <div id="contador">⏳ Cargando nuestro tiempo juntos...</div>
@@ -477,7 +471,6 @@
                 <div class="slider-nav prev" onclick="cambiarSlideManual(-1)">‹</div>
                 <div class="slider-nav next" onclick="cambiarSlideManual(1)">›</div>
 
-                <!-- Tus 15 fotos -->
                 <img src="Foto1.jpeg" class="slide">
                 <img src="Foto2.jpeg" class="slide">
                 <img src="Foto3.jpeg" class="slide">
@@ -492,6 +485,7 @@
                 <img src="Foto12.jpeg" class="slide">
                 <img src="Foto13.jpeg" class="slide">
                 <img src="Foto14.jpeg" class="slide">
+                <img src="Foto15.jpeg" class="slide">
             </div>
         </div>
 
@@ -507,9 +501,8 @@
             </div>
         </section>
 
-        <!-- BOTÓN DETONADOR EXCLUSIVO PARA IR AL JUEGO NUEVO -->
         <section style="text-align: center; padding: 10px 20px;">
-            <button class="btn btn-trigger" onclick="navegarA('quiz-page')">🧩 Espacio de Conexión: Click para conocerte más ❤️</button>
+            <button class="btn btn-trigger" onclick="navegarA('quiz-page')">🧩 Espacio de Conexión: Dinámica para Conocernos ❤️</button>
             <br>
             <button class="btn btn-back" id="btnVerRespuestas" style="display:none; margin-top: 10px;" onclick="mostrarRespuestasGuardadas()">📂 Ver nuestras respuestas guardadas</button>
             <div id="containerRespuestasGlobal" class="card saved-results-box" style="max-width:600px; margin:20px auto; text-align:left;"></div>
@@ -517,7 +510,7 @@
 
         <section>
             <div class="card">
-                <h2>🌹 Mi refugio Eterno</h2>
+                <h2>🌹 Refugio Eterno</h2>
                 <p style="text-align: center; font-style: italic; border-left: 2px solid var(--primary-neon); padding-left: 20px; margin: 20px 0; font-size: 1.1rem;">
                     Apareciste sin prisa, como la luz del amanecer,<br>
                     y en tu mirada encontré todo lo que quise ser.<br>
@@ -563,18 +556,15 @@
     </div>
 
 
-    <!-- ================= VISTA 2: SECCIÓN COMPLETAMENTE NUEVA E INTERACTIVA ================= -->
     <div id="quiz-page" class="page">
         <div class="quiz-title-box">
             <button class="btn btn-back" onclick="navegarA('main-page')">← Volver a la página principal</button>
             <h2>🧩 Frecuencia Compartida</h2>
-            <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">Espacio para que respondas preguntas sin prisa, revelar secretos lindos, reírnos y conocerte aún más.</p>
+            <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">Un espacio diseñado para responder preguntas sin prisa, revelar secretos lindos, reírnos y conocernos aún más.</p>
         </div>
 
-        <!-- FORMULARIO DE CONEXIÓN -->
         <form id="conexionForm" onsubmit="guardarFormulario(event)">
             
-            <!-- Pregunta 1 -->
             <div class="game-card">
                 <div class="game-question">1. Si tuviéramos un domingo completamente libre, sin pendientes de ningún tipo, ¿cuál sería tu plan ideal a mi lado?</div>
                 <div class="game-options-grid">
@@ -588,7 +578,6 @@
                 </div>
             </div>
 
-            <!-- Pregunta 2 -->
             <div class="game-card">
                 <div class="game-question">2. De todas las pequeñas cosas del día a día, ¿cuál es el detalle diario que más te reconforta de nuestra relación?</div>
                 <div class="game-options-grid">
@@ -602,7 +591,6 @@
                 </div>
             </div>
 
-            <!-- Pregunta 3 -->
             <div class="game-card">
                 <div class="game-question">3. ¿Qué tipo de música o canción te gustaría que escucháramos juntos con más frecuencia cuando viajamos o descansamos?</div>
                 <div class="game-options-grid">
@@ -616,7 +604,6 @@
                 </div>
             </div>
 
-            <!-- Pregunta 4 -->
             <div class="game-card">
                 <div class="game-question">4. Si tuvieras un deseo secreto para el futuro de nuestra historia de amor, ¿cuál de estos elegirías?</div>
                 <div class="game-options-grid">
@@ -629,9 +616,8 @@
                 </div>
             </div>
 
-            <!-- BOTONES DE ACCIÓN DEL JUEGO -->
             <div style="text-align: center; padding-bottom: 80px;">
-                <button type="submit" class="btn btn-love">💾 Guardar respuestas en nuestra base de datos</button>
+                <button type="submit" class="btn btn-love">💾 Guardar mis respuestas en nuestra base de datos</button>
             </div>
         </form>
     </div>
@@ -697,10 +683,8 @@
                 });
             }
 
-            // Guardar el array en la base de datos local embebida del navegador
             localStorage.setItem('respuestas_oscar_omar', JSON.stringify(respuestas));
             
-            // Animación de corazones masivos de festejo
             for (let i = 0; i < 25; i++) { setTimeout(crearCorazonDigital, i * 60); }
 
             alert("✨ ¡Tus respuestas se han guardado con éxito, mi amor! Las recordaré para siempre. ❤️");
@@ -722,7 +706,6 @@
             
             if (!datos) return;
 
-            // Alternar visibilidad (abrir/cerrar)
             if (container.style.display === 'block') {
                 container.style.display = 'none';
                 return;
@@ -733,7 +716,7 @@
                 htmlContent += `
                     <div class="saved-item">
                         <div class="saved-q">${item.pregunta}</div>
-                        <div class="saved-a">“${item.respuesta}”</div>
+                        <div class="saved-a">“${item.text ? item.text : item.respuesta}”</div>
                     </div>
                 `;
             });
@@ -742,7 +725,6 @@
             container.style.display = 'block';
         }
 
-        // Ejecutar verificación inicial al cargar la página
         window.addEventListener('DOMContentLoaded', () => {
             verificarRespuestasExistentes();
         });
@@ -767,10 +749,10 @@
         function toggleMusic() {
             if (music.paused) {
                 music.play().catch(e => console.log("Audio play blocked"));
-                musicStatus.innerText = "⏸️ Pausar nuestra canción de amor";
+                musicStatus.innerText = "⏸️ Pausar sintonía";
             } else {
                 music.pause();
-                musicStatus.innerText = "🎵 Reanudar nuestra canción de amor";
+                musicStatus.innerText = "🎵 Reanudar sintonía";
             }
         }
 
@@ -871,7 +853,7 @@
             "Te amo tanto que no cabría en un millón de páginas como esta ❤️",
             "De aquí hasta el último rincón del universo, ida y vuelta ❤️",
             "Te amo por lo que eres, por lo que fui contigo y por lo que seremos juntos ❤️",
-            "Eres el pensamiento más bonito que tengo a lo largo del día ❤️",
+            "Eres mi pensamiento más bonito que tengo a lo largo del día ❤️",
             "Te amo lo suficiente como para elegirte una y mil veces más ❤️",
             "Mucho más de lo que las palabras alcanzan a explicar, mi vida ❤️",
             "Te amo con una fuerza que ni el tiempo ni la distancia podrían cambiar ❤️",
