@@ -1,421 +1,911 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oscar ❤️ Omar</title>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oscar ❤️ Omar</title>
+    <!-- Importación de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Poppins:wght@200;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color-1: #0a0e17;
+            --bg-color-2: #1a253a;
+            --text-main: #ffffff;
+            --text-muted: #d1d5db;
+            --primary-neon: #ff6bdf;
+            --secondary-neon: #4deeea;
+            --glass-bg: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body{
-    font-family:Arial,sans-serif;
-    background:linear-gradient(
-        to bottom,
-        #4db8ff,
-        #87ceeb
-    );
-    color:white;
-    overflow-x:hidden;
-}
+        body {
+            font-family: var(--font-body);
+            background: radial-gradient(circle at center, var(--bg-color-2) 0%, var(--bg-color-1) 100%);
+            color: var(--text-main);
+            overflow-x: hidden;
+            position: relative;
+        }
 
-/* HERO */
+        /* --- ESTRELLAS DE FONDO --- */
+        #glitch-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+        }
 
-.hero{
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:20px;
-}
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: glitch-blink 5s infinite;
+        }
 
-.hero h1{
-    font-size:3rem;
-    text-shadow:3px 3px 8px rgba(0,0,0,.35);
-}
+        @keyframes glitch-blink {
+            0%, 80%, 100% { opacity: 0; transform: scale(0.5); }
+            81% { opacity: 0.8; transform: scale(1.2); background: var(--primary-neon); }
+            82% { opacity: 0; transform: scale(0.5); }
+            83% { opacity: 0.8; transform: scale(1.1); background: var(--secondary-neon); }
+            84%, 90% { opacity: 0.5; transform: scale(1); background: white; }
+        }
 
-.hero p{
-    font-size:1.2rem;
-    text-shadow:2px 2px 4px rgba(0,0,0,.4);
-}
+        /* --- CONTROL DE VISTAS (PÁGINAS) --- */
+        .page {
+            display: none;
+            min-height: 100vh;
+            width: 100%;
+            transition: opacity 0.5s ease-in-out;
+        }
 
-/* NUBES */
+        .page.active {
+            display: block;
+        }
 
-.cloud{
-    position:fixed;
-    background:white;
-    width:150px;
-    height:50px;
-    border-radius:50px;
-    opacity:.85;
-    z-index:-1;
-}
+        /* --- VISTA PRINCIPAL (TU PÁGINA) --- */
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px 10px 20px;
+            position: relative;
+            z-index: 1;
+        }
 
-.cloud:before{
-    content:'';
-    position:absolute;
-    width:70px;
-    height:70px;
-    background:white;
-    border-radius:50%;
-    top:-30px;
-    left:20px;
-}
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: var(--primary-neon);
+            filter: blur(150px);
+            opacity: 0.2;
+            z-index: -1;
+            border-radius: 50%;
+        }
 
-.cloud1{
-    top:80px;
-    animation:move 40s linear infinite;
-}
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+            text-shadow: 0 0 20px rgba(255, 107, 223, 0.7);
+            background: linear-gradient(90deg, #fff, var(--primary-neon), #fff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient-shift 10s infinite linear;
+        }
 
-.cloud2{
-    top:250px;
-    animation:move 60s linear infinite;
-}
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
 
-.cloud3{
-    top:450px;
-    animation:move 50s linear infinite;
-}
+        .hero p {
+            font-size: 1.1rem;
+            font-weight: 200;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
 
-@keyframes move{
-    from{
-        transform:translateX(-300px);
-    }
+        #contador {
+            padding: 15px 35px;
+            border-radius: 50px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--secondary-neon);
+            box-shadow: 0 0 30px rgba(77, 238, 234, 0.2);
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
 
-    to{
-        transform:translateX(calc(100vw + 300px));
-    }
-}
+        /* --- CARRUSEL INTERACTIVO --- */
+        .slider-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0 40px 0;
+            perspective: 1000px;
+        }
 
-/* CONTADOR */
+        .slider {
+            width: 90%;
+            max-width: 900px;
+            height: 600px;
+            position: relative;
+            background: var(--glass-bg);
+            border-radius: 30px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transform: rotateX(2deg);
+            transition: transform 0.5s;
+        }
 
-#contador{
-    margin-top:20px;
-    padding:15px 25px;
-    border-radius:20px;
-    background:rgba(0,0,0,.25);
-    backdrop-filter:blur(10px);
-    font-weight:bold;
-    box-shadow:0 5px 15px rgba(0,0,0,.2);
-}
+        .slider:hover { transform: rotateX(0deg) scale(1.01); }
 
-/* CARRUSEL */
+        .stories {
+            display: flex;
+            gap: 6px;
+            padding: 15px 25px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
+        }
 
-.slider{
-    width:90%;
-    max-width:900px;
-    height:600px;
-    margin:auto;
-    background:white;
-    padding:10px;
-    border-radius:25px;
-    overflow:hidden;
-    box-shadow:0 15px 30px rgba(0,0,0,.25);
-}
+        .story {
+            flex: 1;
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
 
-.stories{
-    display:flex;
-    gap:5px;
-    margin-bottom:10px;
-}
+        .story:hover { transform: scaleY(1.3); }
+        .story .progress { width: 0%; height: 100%; background: rgba(255, 255, 255, 0.4); }
+        .story.active .progress { width: 100%; background: var(--primary-neon); transition: width 0.3s ease; }
 
-.story{
-    flex:1;
-    height:5px;
-    background:#d9d9d9;
-    border-radius:50px;
-}
+        .slide {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            filter: brightness(0.9) contrast(1.1);
+        }
 
-.story.active{
-    background:#5fd35f;
-}
+        .slide.active { display: block; animation: fade-in 0.4s ease-in-out; }
+        @keyframes fade-in { from { opacity: 0; transform: scale(1.02); } to { opacity: 1; transform: scale(1); } }
 
-.slide{
-    width:100%;
-    height:560px;
-    object-fit:cover;
-    display:none;
-    border-radius:20px;
-}
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 15;
+            user-select: none;
+            transition: all 0.3s;
+        }
 
-.slide.active{
-    display:block;
-}
+        .slider-nav:hover { background: var(--primary-neon); box-shadow: 0 0 15px var(--primary-neon); border-color: transparent; }
+        .slider-nav.prev { left: 20px; }
+        .slider-nav.next { right: 20px; }
 
-/* TARJETAS WOODY */
+        /* --- TARJETAS GLASSMORPHISM --- */
+        section {
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
 
-.card{
-    max-width:900px;
-    margin:40px auto;
-    background:#ffd54f;
-    color:#333;
-    padding:30px;
-    border-radius:25px;
-    border:4px solid white;
-    box-shadow:0 10px 30px rgba(0,0,0,.25);
-}
+        .card {
+            max-width: 800px;
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
 
-.card h2{
-    text-align:center;
-    margin-bottom:20px;
-    color:#8b4513;
-}
+        .card::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: var(--secondary-neon);
+            filter: blur(80px);
+            opacity: 0.1;
+            border-radius: 50%;
+        }
 
-.card p,
-.card li{
-    line-height:1.8;
-    color:#333;
-}
+        .card h2 {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary-neon);
+            letter-spacing: -1px;
+            text-shadow: 0 0 15px rgba(255, 107, 223, 0.5);
+        }
 
-/* BOTONES JESSIE */
+        .card p, .card li { font-size: 1.05rem; line-height: 1.9; color: var(--text-muted); margin-bottom: 20px; font-weight: 300; }
+        .card ul { list-style: none; padding-left: 20px; }
+        .card li { position: relative; margin-bottom: 15px; }
+        .card li::before { content: '❤️'; position: absolute; left: -25px; font-size: 0.8rem; }
 
-.btn{
-    padding:14px 28px;
-    border:none;
-    border-radius:30px;
-    cursor:pointer;
-    margin:10px;
-    background:#e53935;
-    color:white;
-    font-weight:bold;
-    transition:.3s;
-    box-shadow:0 5px 15px rgba(0,0,0,.25);
-}
+        /* --- INTERFAZ DINÁMICA DE PREGUNTAS (VISTA DINÁMICA) --- */
+        .quiz-title-box {
+            text-align: center;
+            padding: 40px 20px;
+        }
 
-.btn:hover{
-    transform:translateY(-3px) scale(1.05);
-}
+        .quiz-title-box h2 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            color: var(--secondary-neon);
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(77, 238, 234, 0.4);
+        }
 
-/* TEXTO BOTON TE AMO */
+        .game-card {
+            max-width: 650px;
+            margin: 0 auto 40px auto;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
 
-#loveText{
-    margin-top:15px;
-    font-size:1.3rem;
-    font-weight:bold;
-    color:white;
-    text-shadow:2px 2px 4px rgba(0,0,0,.4);
-}
+        .game-question {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 20px;
+            border-left: 3px solid var(--primary-neon);
+            padding-left: 15px;
+        }
 
-/* SECCIONES */
+        .game-options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
 
-section{
-    padding:20px;
-}
+        .option-label {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 14px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1rem;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
 
-/* CORAZONES */
+        .option-label:hover {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border-color: rgba(255,255,255,0.2);
+        }
 
-.corazon{
-    position:fixed;
-    top:-20px;
-    pointer-events:none;
-    animation:caer linear forwards;
-}
+        .option-label input[type="radio"] {
+            accent-color: var(--secondary-neon);
+            width: 18px;
+            height: 18px;
+        }
 
-@keyframes caer{
-    to{
-        transform:translateY(110vh);
-    }
-}
+        /* Input especial de texto libre */
+        .custom-input-container {
+            margin-top: 15px;
+            display: none; /* Se activa por JS */
+            animation: fadeInShort 0.3s ease;
+        }
 
-/* FOOTER */
+        .custom-textarea {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 12px;
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            resize: none;
+            outline: none;
+            transition: border-color 0.3s;
+        }
 
-footer{
-    text-align:center;
-    padding:50px 20px;
-    text-shadow:2px 2px 4px rgba(0,0,0,.4);
-}
+        .custom-textarea:focus {
+            border-color: var(--primary-neon);
+            box-shadow: 0 0 10px rgba(255, 107, 223, 0.2);
+        }
 
-/* RESPONSIVE */
+        @keyframes fadeInShort { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
-@media(max-width:768px){
+        /* Contenedor de respuestas guardadas */
+        .saved-results-box {
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
 
-    .hero h1{
-        font-size:2.2rem;
-    }
+        .saved-item {
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 10px 0;
+        }
+        .saved-item:last-child { border: none; }
+        .saved-q { font-weight: 600; color: var(--secondary-neon); font-size: 0.95rem; }
+        .saved-a { color: var(--text-muted); font-style: italic; font-size: 0.95rem; margin-top: 3px; }
 
-    .slider{
-        height:400px;
-    }
+        /* --- BOTONES MODERNOS --- */
+        .btn {
+            padding: 16px 32px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            z-index: 1;
+        }
 
-    .slide{
-        height:360px;
-    }
+        .btn-music { background: transparent; color: var(--secondary-neon); border: 2px solid var(--secondary-neon); box-shadow: 0 0 15px rgba(77, 238, 234, 0.3); margin-bottom: 20px; }
+        .btn-music:hover { background: var(--secondary-neon); color: var(--bg-color-1); box-shadow: 0 0 30px rgba(77, 238, 234, 0.6); transform: translateY(-2px); }
 
-    .card{
-        margin:20px;
-        padding:20px;
-    }
+        .btn-love { background: var(--primary-neon); color: white; box-shadow: 0 5px 20px rgba(255, 107, 223, 0.4); }
+        .btn-love:hover { box-shadow: 0 8px 30px rgba(255, 107, 223, 0.7); transform: translateY(-3px) scale(1.02); }
 
-}
+        .btn-trigger { background: linear-gradient(45deg, var(--primary-neon), var(--secondary-neon)); color: #fff; font-size: 1.1rem; box-shadow: 0 0 25px rgba(77, 238, 234, 0.4); margin: 30px 0; padding: 18px 40px; }
+        .btn-trigger:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(255, 107, 223, 0.6); }
 
-</style>
+        .btn-back { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); font-size: 0.9rem; padding: 10px 20px; margin-bottom: 20px; }
+        .btn-back:hover { background: rgba(255,255,255,0.2); }
+
+        /* --- TEXTO INTERACTIVO --- */
+        #loveTextContainer { min-height: 60px; margin-top: 25px; display: flex; justify-content: center; align-items: center; }
+        #loveText { font-size: 1.2rem; font-weight: 400; color: white; text-align: center; font-style: italic; opacity: 0; transition: opacity 0.5s ease; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        #loveText.show { opacity: 1; }
+
+        /* --- LLUVIA DE CORAZONES --- */
+        .corazon { position: fixed; top: -30px; pointer-events: none; z-index: 100; color: var(--primary-neon); text-shadow: 0 0 10px rgba(255, 107, 223, 0.8); animation: caer linear forwards; }
+        @keyframes caer { 0% { transform: translateY(-10px) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+
+        /* --- FOOTER --- */
+        footer { text-align: center; padding: 80px 20px; color: rgba(255,255,255,0.3); font-size: 0.9rem; font-weight: 200; letter-spacing: 2px; }
+
+        /* --- RESPONSIVE --- */
+        @media(max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            #contador { font-size: 1rem; padding: 15px 25px; }
+            .slider { height: 400px; }
+            .card { padding: 30px 20px; }
+            .card h2 { font-size: 1.8rem; }
+            .btn { width: 100%; margin: 10px 0; }
+            .slider-nav { width: 40px; height: 40px; font-size: 1.5rem; }
+            .slider-nav.prev { left: 10px; }
+            .slider-nav.next { right: 10px; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="cloud cloud1"></div>
-<div class="cloud cloud2"></div>
-<div class="cloud cloud3"></div>
+    <!-- Fondo de estrellas globales -->
+    <div id="glitch-stars"></div>
 
-<div class="hero">
-<h1>❤️ Oscar & Omar ❤️</h1>
-<p>Juntos oficialmente desde el 3 de junio de 2026</p>
-<button class="btn" onclick="toggleMusic()">🎵 Da click aquí para escuchar tú canción mi chaparrito</button>
-<div id="contador"></div>
-<audio id="music" loop>
-<source src="Zoé - Labios Rotos (MTV Unplugged) - (320 Kbps).mp3" type="audio/mpeg">
-</audio>
-</div>
+    <!-- ================= VISTA 1: PÁGINA PRINCIPAL ROMÁNTICA ================= -->
+    <div id="main-page" class="page active">
+        <div class="hero">
+            <h1>❤️ Oscar & Omar ❤️</h1>
+            <p>Juntos oficialmente desde el 3 de junio de 2026</p>
+            
+            <button class="btn btn-music" onclick="toggleMusic()">
+                <span id="musicStatus">🎵 Da click aquí para escuchar nuestra canción de amor</span>
+            </button>
+            
+            <div id="contador">⏳ Cargando nuestro tiempo juntos...</div>
+            
+            <audio id="music" loop>
+                <source src="Zoé - Labios Rotos (MTV Unplugged) - (320 Kbps).mp3" type="audio/mpeg">
+            </audio>
+        </div>
 
-<div class="slider">
-<div class="stories">
-<div class="story active"></div><div class="story"></div><div class="story"></div>
-<div class="story"></div><div class="story"></div><div class="story"></div><div class="story"></div><div class="story"></div><div class="story"></div><div class="story"></div>
-</div>
-<img src="Foto1.jpeg" class="slide active">
-<img src="Foto2.jpeg" class="slide">
-<img src="Foto3.jpeg" class="slide">
-<img src="Foto4.jpeg" class="slide">
-<img src="Foto5.jpeg" class="slide">
-<img src="Foto6.jpeg" class="slide">
-<img src="Foto7.jpeg" class="slide">
-<img src="Foto8.jpeg" class="slide">
-<img src="Foto9.jpeg" class="slide">
-<img src="Foto10.jpeg" class="slide">
-</div>
+        <div class="slider-container">
+            <div class="slider" id="mainSlider">
+                <div class="stories"></div>
+                <div class="slider-nav prev" onclick="cambiarSlideManual(-1)">‹</div>
+                <div class="slider-nav next" onclick="cambiarSlideManual(1)">›</div>
 
-<section><div class="card">
-<h2>💌 Para Omar</h2>
+                <!-- Tus 15 fotos -->
+                <img src="Foto1.jpeg" class="slide">
+                <img src="Foto2.jpeg" class="slide">
+                <img src="Foto3.jpeg" class="slide">
+                <img src="Foto4.jpeg" class="slide">
+                <img src="Foto5.jpeg" class="slide">
+                <img src="Foto6.jpeg" class="slide">
+                <img src="Foto7.jpeg" class="slide">
+                <img src="Foto8.jpeg" class="slide">
+                <img src="Foto9.jpeg" class="slide">
+                <img src="Foto10.jpeg" class="slide">
+                <img src="Foto11.jpeg" class="slide">
+                <img src="Foto12.jpeg" class="slide">
+                <img src="Foto13.jpeg" class="slide">
+                <img src="Foto14.jpeg" class="slide">
+            </div>
+        </div>
 
-<p>
+        <section>
+            <div class="card">
+                <h2>💌 Pensando en ti, mi amor</h2>
+                <p>Omar, mi vida,</p>
+                <p>Dicen que el hogar no es un edificio, sino una persona, y yo encontré el mío en ti. Desde que entraste a mi mundo, no hay un solo día en el que no me descubra sonriendo a la nada simplemente al recordar tu risa o la forma tan bonita en la que me miras.</p>
+                <p>Me cambiaste la perspectiva de todo. Contigo aprendí lo hermoso que es compartir las pequeñas cosas: un café por la mañana, un mensaje a mitad del día, una plática infinita o un abrazo silencioso que cura cualquier mal día. Gracias por tu paciencia, por tu ternura y por recordarme, sin siquiera intentarlo, lo bonito que es querer de verdad.</p>
+                <p>Esta página es solo un pretexto para recordarte lo que mi alma ya sabe de memoria: que te elijo hoy, mañana y cada uno de los días que el universo nos regale. No importa a dónde vayamos o los caminos que tomemos, mientras mi mano esté entrelazada con la tuya, sé que estoy exactamente en el lugar correcto.</p>
+                <p style="text-align: center; color: white; font-weight: 600; font-size: 1.3rem; margin-top: 30px;">❤️ Eres mi presente y mi futuro más bonito ❤️</p>
+                <p style="text-align: right; font-family: var(--font-heading); color: var(--secondary-neon); letter-spacing: 2px; margin-top: 20px;">Con todo mi amor, Oscar</p>
+            </div>
+        </section>
 
-Mi amor,
+        <!-- BOTÓN DETONADOR EXCLUSIVO PARA IR AL JUEGO NUEVO -->
+        <section style="text-align: center; padding: 10px 20px;">
+            <button class="btn btn-trigger" onclick="navegarA('quiz-page')">🧩 Espacio de Conexión: Click para conocerte más ❤️</button>
+            <br>
+            <button class="btn btn-back" id="btnVerRespuestas" style="display:none; margin-top: 10px;" onclick="mostrarRespuestasGuardadas()">📂 Ver nuestras respuestas guardadas</button>
+            <div id="containerRespuestasGlobal" class="card saved-results-box" style="max-width:600px; margin:20px auto; text-align:left;"></div>
+        </section>
 
-No sé si alguna vez llegaré a encontrar las palabras perfectas para describir lo mucho que significas para mí.
+        <section>
+            <div class="card">
+                <h2>🌹 Mi refugio Eterno</h2>
+                <p style="text-align: center; font-style: italic; border-left: 2px solid var(--primary-neon); padding-left: 20px; margin: 20px 0; font-size: 1.1rem;">
+                    Apareciste sin prisa, como la luz del amanecer,<br>
+                    y en tu mirada encontré todo lo que quise ser.<br>
+                    Eres el silencio calmo que desarma mis temores,<br>
+                    el rincón del mundo donde florecen mis colores.<br><br>
+                    No busco un cielo estrellado ni una luna de cristal,<br>
+                    me basta coincidir contigo en este tiempo terrenal.<br>
+                    Porque si el destino es sabio y nos unió en el camino...<br><br>
+                    Mi único deseo eterno es quedarme en tu destino. ❤️
+                </p>
+            </div>
+        </section>
 
-Desde que llegaste a mi vida, todo tiene más color, más emoción y más sentido.
+        <section>
+            <div class="card">
+                <h2>💖 Las razones por las que iluminas mi vida</h2>
+                <ul>
+                    <li>Por la paz inmensa que me da escuchar tu voz cuando termina un día difícil.</li>
+                    <li>Por la manera tan única que tienes de entenderme, a veces sin decir una sola palabra.</li>
+                    <li>Por tus abrazos, que tienen el superpoder de hacer desaparecer cualquier preocupación.</li>
+                    <li>Porque a tu lado soy mi versión más auténtica, libre y feliz.</li>
+                    <li>Por la complicidad que tenemos y la forma en que convertimos cualquier tarde simple en una aventura inolvidable.</li>
+                    <li>Por cómo cuidas de mí y por hacerme sentir el centro de tu universo.</li>
+                    <li>Porque me encantan tus detalles, tus risas compartidas y hasta tus manías.</li>
+                    <li>Por tu gran corazón y la generosidad con la que llenas de luz todo lo que tocas.</li>
+                    <li>Porque caminar de tu mano hace que cualquier camino valga la pena.</li>
+                    <li>Por la forma en que me miras, haciéndome sentir la persona más afortunada del mundo.</li>
+                    <li>Simplemente porque eres tú, Omar, el amor de mi vida. ❤️</li>
+                </ul>
+            </div>
+        </section>
 
-Gracias por cada abrazo, por cada sonrisa, por cada conversación y por cada momento compartido.
+        <section style="text-align:center; padding-bottom: 100px; display: block;">
+            <div class="card" style="margin: 0 auto; max-width: 600px;">
+                <button class="btn btn-love" id="loveBtn">❤️ Presiona aquí para ver cuánto te amo ❤️</button>
+                <div id="loveTextContainer">
+                    <p id="loveText"></p>
+                </div>
+            </div>
+        </section>
 
-Gracias por estar conmigo en los días buenos y en los complicados.
+        <footer>OSCAR + OMAR // NUESTRA HISTORIA CONTINÚA // ❤️</footer>
+    </div>
 
-Gracias por hacerme sentir querido.
 
-Quiero seguir creando recuerdos contigo, viajando, riendo, tomándonos fotos y viviendo aventuras.
+    <!-- ================= VISTA 2: SECCIÓN COMPLETAMENTE NUEVA E INTERACTIVA ================= -->
+    <div id="quiz-page" class="page">
+        <div class="quiz-title-box">
+            <button class="btn btn-back" onclick="navegarA('main-page')">← Volver a la página principal</button>
+            <h2>🧩 Frecuencia Compartida</h2>
+            <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">Espacio para que respondas preguntas sin prisa, revelar secretos lindos, reírnos y conocerte aún más.</p>
+        </div>
 
-Y si algún día olvidas cuánto te amo, vuelve a esta página y recuerda que alguien pensó en ti mientras escribía cada línea.
+        <!-- FORMULARIO DE CONEXIÓN -->
+        <form id="conexionForm" onsubmit="guardarFormulario(event)">
+            
+            <!-- Pregunta 1 -->
+            <div class="game-card">
+                <div class="game-question">1. Si tuviéramos un domingo completamente libre, sin pendientes de ningún tipo, ¿cuál sería tu plan ideal a mi lado?</div>
+                <div class="game-options-grid">
+                    <label class="option-label"><input type="radio" name="p1" value="Maratón de películas/series en pijama todo el día" onclick="evaluarCustomInput(1, false)"> Maratón de películas/series en pijama todo el día</label>
+                    <label class="option-label"><input type="radio" name="p1" value="Salir a comer algo rico y caminar sin rumbo a algún lugar tranquilo" onclick="evaluarCustomInput(1, false)"> Salir a comer algo rico y caminar sin rumbo a algún lugar tranquilo</label>
+                    <label class="option-label"><input type="radio" name="p1" value="Cocinar algo juntos e inventar un postre loco" onclick="evaluarCustomInput(1, false)"> Cocinar algo juntos e inventar un postre loco</label>
+                    <label class="option-label"><input type="radio" name="p1" value="custom" onclick="evaluarCustomInput(1, true)"> Otro / Quiero escribir algo personalizado...</label>
+                </div>
+                <div class="custom-input-container" id="custom-container-1">
+                    <textarea class="custom-textarea" id="custom-text-1" placeholder="Escribe aquí tu plan de domingo perfecto conmigo... ❤️"></textarea>
+                </div>
+            </div>
 
-❤️
+            <!-- Pregunta 2 -->
+            <div class="game-card">
+                <div class="game-question">2. De todas las pequeñas cosas del día a día, ¿cuál es el detalle diario que más te reconforta de nuestra relación?</div>
+                <div class="game-options-grid">
+                    <label class="option-label"><input type="radio" name="p2" value="El mensajito de buenos días o de buenas noches listo al despertar" onclick="evaluarCustomInput(2, false)"> El mensajito de buenos días o de buenas noches listo al despertar</label>
+                    <label class="option-label"><input type="radio" name="p2" value="Saber que puedo contarte lo que sea de mi día, por más tonto que parezca" onclick="evaluarCustomInput(2, false)"> Saber que puedo contarte lo que sea de mi día, por más tonto que parezca</label>
+                    <label class="option-label"><input type="radio" name="p2" value="La calidez y seguridad de tus abrazos cuando nos vemos" onclick="evaluarCustomInput(2, false)"> La calidez y seguridad de tus abrazos cuando nos vemos</label>
+                    <label class="option-label"><input type="radio" name="p2" value="custom" onclick="evaluarCustomInput(2, true)"> Otro / Déjame explicarte... ❤️</label>
+                </div>
+                <div class="custom-input-container" id="custom-container-2">
+                    <textarea class="custom-textarea" id="custom-text-2" placeholder="Escribe aquí ese pequeño detalle que te hace feliz..."></textarea>
+                </div>
+            </div>
 
-Te amo muchísimo.
+            <!-- Pregunta 3 -->
+            <div class="game-card">
+                <div class="game-question">3. ¿Qué tipo de música o canción te gustaría que escucháramos juntos con más frecuencia cuando viajamos o descansamos?</div>
+                <div class="game-options-grid">
+                    <label class="option-label"><input type="radio" name="p3" value="Canciones románticas/acústicas para cantar bajito" onclick="evaluarCustomInput(3, false)"> Canciones románticas/acústicas para cantar bajito</label>
+                    <label class="option-label"><input type="radio" name="p3" value="Rock alternativo / Indie (estilo Zoé o similares)" onclick="evaluarCustomInput(3, false)"> Rock alternativo / Indie (estilo Zoé o similares)</label>
+                    <label class="option-label"><input type="radio" name="p3" value="Música alegre y movida para bailar o cargarnos de energía" onclick="evaluarCustomInput(3, false)"> Música alegre y movida para bailar o cargarnos de energía</label>
+                    <label class="option-label"><input type="radio" name="p3" value="custom" onclick="evaluarCustomInput(3, true)"> Otro / Te recomiendo una canción...</label>
+                </div>
+                <div class="custom-input-container" id="custom-container-3">
+                    <textarea class="custom-textarea" id="custom-text-3" placeholder="Ponme el nombre de tus canciones o géneros preferidos..."></textarea>
+                </div>
+            </div>
 
-<br>   >>>>>>>> Oscar <<<<<<<<<<<
+            <!-- Pregunta 4 -->
+            <div class="game-card">
+                <div class="game-question">4. Si tuvieras un deseo secreto para el futuro de nuestra historia de amor, ¿cuál de estos elegirías?</div>
+                <div class="game-options-grid">
+                    <label class="option-label"><input type="radio" name="p4" value="Que nunca perdamos la hermosa complicidad y risas que tenemos hoy" onclick="evaluarCustomInput(4, false)"> Que nunca perdamos la hermosa complicidad y risas que tenemos hoy</label>
+                    <label class="option-label"><input type="radio" name="p4" value="Lograr cumplir cada uno de nuestros proyectos personales apoyándonos mutuamente" onclick="evaluarCustomInput(4, false)"> Lograr cumplir cada uno de nuestros proyectos personales apoyándonos mutuamente</label>
+                    <label class="option-label"><input type="radio" name="p4" value="custom" onclick="evaluarCustomInput(4, true)"> Prefiero escribir mi propio deseo desde cero... ❤️</label>
+                </div>
+                <div class="custom-input-container" id="custom-container-4">
+                    <textarea class="custom-textarea" id="custom-text-4" placeholder="Confiesa aquí lo que tu corazón desea para los dos..."></textarea>
+                </div>
+            </div>
 
-</p>
+            <!-- BOTONES DE ACCIÓN DEL JUEGO -->
+            <div style="text-align: center; padding-bottom: 80px;">
+                <button type="submit" class="btn btn-love">💾 Guardar respuestas en nuestra base de datos</button>
+            </div>
+        </form>
+    </div>
 
-</div></section>
+    <script>
+        // --- 1. CONTROL DE NAVEGACIÓN ENTRE SECCIONES ---
+        function navegarA(idPagina) {
+            document.querySelectorAll('.page').forEach(pag => {
+                pag.classList.remove('active');
+            });
+            const destino = document.getElementById(idPagina);
+            destino.classList.add('active');
+            window.scrollTo(0, 0);
+        }
 
-<section><div class="card">
-<h2>🌹 Un Poema Para Ti</h2>
-<p>
+        // --- 2. ACTIVAR/OCULTAR CAJAS DE TEXTO PERSONALIZADO ("OTRO") ---
+        function evaluarCustomInput(index, mostrar) {
+            const container = document.getElementById(`custom-container-${index}`);
+            const textarea = document.getElementById(`custom-text-${index}`);
+            if (mostrar) {
+                container.style.display = 'block';
+                textarea.required = true;
+            } else {
+                container.style.display = 'none';
+                textarea.required = false;
+                textarea.value = '';
+            }
+        }
 
-No sé cuántas estrellas iluminan el cielo,
+        // --- 3. BASE DE DATOS LOCALSTORAGE (GUARDAR Y RECUPERAR) ---
+        const preguntasTextos = [
+            "1. Plan de domingo ideal juntos:",
+            "2. Pequeño detalle diario que reconforta:",
+            "3. Música o canción para compartir:",
+            "4. Deseo secreto para nuestro futuro:"
+        ];
 
-pero ninguna brilla tanto como tus ojos.
+        function guardarFormulario(event) {
+            event.preventDefault();
+            let respuestas = [];
 
-No sé cuántos caminos existen,
+            for (let i = 1; i <= 4; i++) {
+                const radioSel = document.querySelector(`input[name="p${i}"]:checked`);
+                if (!radioSel) {
+                    alert(`Por favor, responde la pregunta ${i} antes de guardar.`);
+                    return;
+                }
 
-pero mi favorito siempre será el que me lleva a ti.
+                let valorRespuesta = '';
+                if (radioSel.value === 'custom') {
+                    valorRespuesta = document.getElementById(`custom-text-${i}`).value.trim();
+                    if (!valorRespuesta) {
+                        alert(`Escribiste 'Otro' en la pregunta ${i}, por favor rellena el cuadro.`);
+                        return;
+                    }
+                } else {
+                    valorRespuesta = radioSel.value;
+                }
 
-No sé cuántos años nos esperan,
+                respuestas.push({
+                    pregunta: preguntasTextos[i-1],
+                    respuesta: valorRespuesta
+                });
+            }
 
-pero quiero vivirlos todos contigo.
+            // Guardar el array en la base de datos local embebida del navegador
+            localStorage.setItem('respuestas_oscar_omar', JSON.stringify(respuestas));
+            
+            // Animación de corazones masivos de festejo
+            for (let i = 0; i < 25; i++) { setTimeout(crearCorazonDigital, i * 60); }
 
-Porque mi lugar favorito no es un lugar.
+            alert("✨ ¡Tus respuestas se han guardado con éxito, mi amor! Las recordaré para siempre. ❤️");
+            verificarRespuestasExistentes();
+            navegarA('main-page');
+        }
 
-Eres tú.
+        function verificarRespuestasExistentes() {
+            const datosGuardados = localStorage.getItem('respuestas_oscar_omar');
+            const btnVer = document.getElementById('btnVerRespuestas');
+            if (datosGuardados) {
+                btnVer.style.display = 'inline-flex';
+            }
+        }
 
-❤️
-</p>
-</div></section>
+        function mostrarRespuestasGuardadas() {
+            const datos = JSON.parse(localStorage.getItem('respuestas_oscar_omar'));
+            const container = document.getElementById('containerRespuestasGlobal');
+            
+            if (!datos) return;
 
-<div class="card">
+            // Alternar visibilidad (abrir/cerrar)
+            if (container.style.display === 'block') {
+                container.style.display = 'none';
+                return;
+            }
 
-<h2>💖 Razones Por Las Que Te Amo</h2>
+            let htmlContent = `<h3 style="font-family: var(--font-heading); color: var(--primary-neon); font-size:1.2rem; margin-bottom:15px; text-align:center;">📂 Respuestas Guardadas</h3>`;
+            datos.forEach(item => {
+                htmlContent += `
+                    <div class="saved-item">
+                        <div class="saved-q">${item.pregunta}</div>
+                        <div class="saved-a">“${item.respuesta}”</div>
+                    </div>
+                `;
+            });
 
-<ul>
+            container.innerHTML = htmlContent;
+            container.style.display = 'block';
+        }
 
-<li>Porque me haces sonreír.</li>
-<li>Porque me haces sentir seguro.</li>
-<li>Porque siempre estás para mí.</li>
-<li>Porque me haces feliz.</li>
-<li>Porque compartimos aventuras increíbles.</li>
-<li>Porque me encanta pasar tiempo contigo.</li>
-<li>Porque eres mi persona favorita.</li>
-<li>Porque me eliges cada día.</li>
-<li>Porque haces especiales los momentos simples.</li>
-<li>Porque eres Omar. ❤️</li>
+        // Ejecutar verificación inicial al cargar la página
+        window.addEventListener('DOMContentLoaded', () => {
+            verificarRespuestasExistentes();
+        });
 
-</ul>
 
-<section style="text-align:center">
-<button class="btn" id="loveBtn">❤️ Da click aquí las veces que quieras para saber cuanto te amo.</button>
-<p id="loveText"></p>
-</section>
+        // --- 4. FONDO DE ESTRELLAS BLINK ---
+        const starsContainer = document.getElementById('glitch-stars');
+        for (let i = 0; i < 80; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 3 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.animationDelay = Math.random() * 5 + 's';
+            starsContainer.appendChild(star);
+        }
 
-<script>
-function toggleMusic(){const m=document.getElementById('music');m.paused?m.play():m.pause();}
+        // --- 5. CONTROL DE MÚSICA ---
+        const music = document.getElementById('music');
+        const musicStatus = document.getElementById('musicStatus');
+        function toggleMusic() {
+            if (music.paused) {
+                music.play().catch(e => console.log("Audio play blocked"));
+                musicStatus.innerText = "⏸️ Pausar nuestra canción de amor";
+            } else {
+                music.pause();
+                musicStatus.innerText = "🎵 Reanudar nuestra canción de amor";
+            }
+        }
 
-function actualizar(){
-const inicio=new Date("2026-06-03T00:00:00");
-const ahora=new Date();
-let d=Math.floor((ahora-inicio)/1000);
-let dias=Math.floor(d/86400);d%=86400;
-let horas=Math.floor(d/3600);d%=3600;
-let min=Math.floor(d/60);let seg=d%60;
-document.getElementById('contador').innerHTML=`⏳ ${dias} días ${horas} horas ${min} minutos ${seg} segundos`;
-}
-setInterval(actualizar,1000);actualizar();
+        // --- 6. CONTADOR DE TIEMPO ---
+        function actualizarContador() {
+            const inicio = new Date("2026-06-03T00:00:00");
+            const ahora = new Date();
+            
+            if (ahora < inicio) {
+                document.getElementById('contador').innerHTML = `⏳ Iniciando nuestra historia...`;
+                return;
+            }
 
-let actual=0;
-const slides=document.querySelectorAll('.slide');
-const stories=document.querySelectorAll('.story');
-setInterval(()=>{
-slides[actual].classList.remove('active');
-stories[actual].classList.remove('active');
-actual=(actual+1)%slides.length;
-slides[actual].classList.add('active');
-stories[actual].classList.add('active');
-},1500);
+            let diff = Math.floor((ahora - inicio) / 1000);
 
-const mensajes=[
-"Más que todas las estrellas ❤️",
-"Más que ayer y menos que mañana ❤️",
-"Hasta el infinito... y más allá. 🚀💚",
-"Muchísimo ❤️",
-"Lo suficiente para desvelarme haciendote este detalle mi vida ❤️"
-];
-document.getElementById('loveBtn').onclick=()=>{
-document.getElementById('loveText').innerHTML=mensajes[Math.floor(Math.random()*mensajes.length)];
-};
+            let dias = Math.floor(diff / 86400); diff %= 86400;
+            let horas = Math.floor(diff / 3600); diff %= 3600;
+            let minutos = Math.floor(diff / 60);
+            let segundos = diff % 60;
 
-function crearCorazon(){
-const c=document.createElement('div');
-c.innerHTML='❤️';
-c.className='corazon';
-c.style.left=Math.random()*100+'vw';
-c.style.fontSize=(Math.random()*25+15)+'px';
-c.style.animationDuration=(Math.random()*5+5)+'s';
-document.body.appendChild(c);
-setTimeout(()=>c.remove(),10000);
-}
-setInterval(crearCorazon,250);
+            const pad = (num) => num.toString().padStart(2, '0');
 
-</script>
+            document.getElementById('contador').innerHTML = 
+                `${dias} días ${pad(horas)} horas ${pad(minutos)} minutos ${pad(segundos)} segundos`;
+        }
+        setInterval(actualizarContador, 1000);
+        actualizarContador();
+
+        // --- 7. MEZCLA ALEATORIA Y GENERACIÓN DEL CARRUSEL ---
+        const slider = document.getElementById('mainSlider');
+        let slidesArray = Array.from(slider.querySelectorAll('.slide'));
+
+        for (let i = slidesArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [slidesArray[i], slidesArray[j]] = [slidesArray[j], slidesArray[i]];
+        }
+
+        slidesArray.forEach(slide => { slider.appendChild(slide); });
+        slidesArray[0].classList.add('active');
+
+        const slides = document.querySelectorAll('.slide');
+        const storiesContainer = document.querySelector('.stories');
+        let slideActual = 0;
+        let carruselIntervalo;
+
+        slides.forEach((_, index) => {
+            const story = document.createElement('div');
+            story.className = `story ${index === 0 ? 'active' : ''}`;
+            story.innerHTML = '<div class="progress"></div>';
+            story.addEventListener('click', () => { mostrarSlideEspecifico(index); });
+            storiesContainer.appendChild(story);
+        });
+
+        function actualizarVistaCarrusel() {
+            const stories = document.querySelectorAll('.story');
+            slides.forEach((slide, idx) => {
+                if (idx === slideActual) {
+                    slide.classList.add('active');
+                    stories[idx].classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                    stories[idx].classList.remove('active');
+                }
+            });
+        }
+
+        function iniciarTemporizadorCarrusel() {
+            clearInterval(carruselIntervalo);
+            carruselIntervalo = setInterval(() => {
+                slideActual = (slideActual + 1) % slides.length;
+                actualizarVistaCarrusel();
+            }, 1500);
+        }
+
+        function cambiarSlideManual(direccion) {
+            slideActual = (slideActual + direccion + slides.length) % slides.length;
+            actualizarVistaCarrusel();
+            iniciarTemporizadorCarrusel(); 
+        }
+
+        function mostrarSlideEspecifico(indice) {
+            slideActual = indice;
+            actualizarVistaCarrusel();
+            iniciarTemporizadorCarrusel(); 
+        }
+
+        iniciarTemporizadorCarrusel();
+
+        // --- 8. MENSAJES DE AMOR INTERACTIVOS ---
+        const mensajes = [
+            "Más de lo que imaginas y mucho más de lo que sé expresar ❤️",
+            "Más que ayer y muchísimo menos que mañana ❤️",
+            "Hasta el infinito... y más allá, mi chaparrito 🚀💚",
+            "Te amo con cada latido de mi corazón ❤️",
+            "Lo suficiente para desvelarme feliz de la vida haciendo este detalle para ti ❤️",
+            "Con todo mi corazón y cada parte de mi alma ❤️",
+            "Eres mi recordatorio diario de lo bonito que es la vida ❤️",
+            "Te amo tanto que no cabría en un millón de páginas como esta ❤️",
+            "De aquí hasta el último rincón del universo, ida y vuelta ❤️",
+            "Te amo por lo que eres, por lo que fui contigo y por lo que seremos juntos ❤️",
+            "Eres el pensamiento más bonito que tengo a lo largo del día ❤️",
+            "Te amo lo suficiente como para elegirte una y mil veces más ❤️",
+            "Mucho más de lo que las palabras alcanzan a explicar, mi vida ❤️",
+            "Te amo con una fuerza que ni el tiempo ni la distancia podrían cambiar ❤️",
+            "Eres mi persona favorita, hoy, mañana y para siempre ❤️"
+        ];
+        
+        const loveBtn = document.getElementById('loveBtn');
+        const loveText = document.getElementById('loveText');
+
+        loveBtn.onclick = () => {
+            loveText.classList.remove('show');
+            setTimeout(() => {
+                const nuevoMensaje = mensajes[Math.floor(Math.random() * mensajes.length)];
+                loveText.innerHTML = nuevoMensaje;
+                loveText.classList.add('show');
+            }, 200);
+        };
+
+        // --- 9. LLUVIA DE CORAZONES ---
+        function crearCorazonDigital() {
+            const corazon = document.createElement('div');
+            corazon.innerHTML = '❤️'; 
+            corazon.className = 'corazon';
+            corazon.style.left = Math.random() * 100 + 'vw';
+            
+            const size = Math.random() * 20 + 10;
+            corazon.style.fontSize = size + 'px';
+            corazon.style.animationDuration = Math.random() * 3 + 2 + 's';
+            corazon.style.opacity = Math.random() * 0.5 + 0.5;
+
+            document.body.appendChild(corazon);
+            setTimeout(() => corazon.remove(), 5000);
+        }
+        setInterval(crearCorazonDigital, 300);
+    </script>
 </body>
 </html>
