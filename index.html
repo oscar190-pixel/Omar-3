@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Poppins:wght@200;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color-1: #0a0e17; /* Azul oscuro absoluto */
+            --bg-color-1: #0a0e17;
             --bg-color-2: #161f30;
             --text-main: #ffffff;
             --text-muted: #d1d5db;
@@ -25,7 +25,7 @@
         }
 
         html, body {
-            background-color: #0a0e17 !important; /* Forzado absoluto */
+            background-color: #0a0e17 !important;
             color: var(--text-main);
             overflow-x: hidden;
             position: relative;
@@ -69,7 +69,7 @@
             display: none;
             min-height: 100vh;
             width: 100%;
-            background-color: #0a0e17 !important; /* Forzamos fondo oscuro en cada pestaña */
+            background-color: #0a0e17 !important;
         }
 
         .page.active {
@@ -132,7 +132,7 @@
         #contador {
             padding: 15px 35px;
             border-radius: 50px;
-            background: #161f30 !important; /* Fondo sólido para iPhone */
+            background: #161f30 !important;
             border: 1px solid rgba(255, 255, 255, 0.15);
             font-family: var(--font-heading);
             font-weight: 700;
@@ -233,7 +233,7 @@
         .slider-nav.prev { left: 20px; }
         .slider-nav.next { right: 20px; }
 
-        /* --- TARJETAS BLINDADAS (Fondo Sólido para evitar Bug de iPhone) --- */
+        /* --- TARJETAS BLINDADAS --- */
         section {
             padding: 40px 20px;
             display: flex;
@@ -244,7 +244,7 @@
         .card {
             max-width: 800px;
             width: 100%;
-            background: #121926 !important; /* Cambiado a sólido para que iOS no lo pinte de blanco */
+            background: #121926 !important;
             padding: 40px;
             border-radius: 30px;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -286,7 +286,7 @@
         .game-card {
             max-width: 650px;
             margin: 0 auto 40px auto;
-            background: #121926 !important; /* Forzado ultra sólido en iPhone */
+            background: #121926 !important;
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 25px;
             padding: 30px;
@@ -750,12 +750,12 @@
             }
         }
 
-        // --- 6. CONTADOR DE TIEMPO ---
+        // --- 6. CONTADOR DE TIEMPO (¡ARREGLADO!) ---
         function actualizarContador() {
             const inicio = new Date("2026-06-03T00:00:00");
             const ahora = new Date();
             
-            if (now < inicio) {
+            if (ahora < inicio) {
                 document.getElementById('contador').innerHTML = `⏳ Iniciando nuestra historia...`;
                 return;
             }
