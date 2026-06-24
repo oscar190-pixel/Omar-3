@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oscar ❤️ Omar</title>
+    <!-- Importación de Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Poppins:wght@200;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color-1: #0a0e17;
-            --bg-color-2: #1a253a;
+            /* Paleta de Colores Cyber-Romántica Pastel */
+            --bg-color-1: #0a0e17; /* Azul oscuro espacial */
+            --bg-color-2: #1a253a; /* Azul intermedio */
             --text-main: #ffffff;
             --text-muted: #d1d5db;
-            --primary-neon: #ff6bdf;
-            --secondary-neon: #4deeea;
-            --glass-bg: rgba(15, 23, 42, 0.65); /* Fondo oscuro de respaldo */
+            --primary-neon: #ff6bdf; /* Rosa Neón Suave */
+            --secondary-neon: #4deeea; /* Cian Neón Suave */
+            --glass-bg: rgba(255, 255, 255, 0.05); 
             --glass-border: rgba(255, 255, 255, 0.12);
             --font-heading: 'Montserrat', sans-serif;
             --font-body: 'Poppins', sans-serif;
@@ -27,7 +29,10 @@
 
         body {
             font-family: var(--font-body);
+            /* COLOR DE RESPALDO SEGURO: Si el cel no entiende el gradient, se pintará de este azul oscuro */
+            background-color: #0a0e17; 
             background: radial-gradient(circle at center, var(--bg-color-2) 0%, var(--bg-color-1) 100%);
+            background-attachment: fixed; /* Asegura que el fondo cubra todo al hacer scroll en móvil */
             color: var(--text-main);
             overflow-x: hidden;
             position: relative;
@@ -72,7 +77,7 @@
             display: block;
         }
 
-        /* --- VISTA PRINCIPAL (TU PÁGINA) --- */
+        /* --- VISTA PRINCIPAL --- */
         .hero {
             min-height: 60vh;
             display: flex;
@@ -127,7 +132,7 @@
         #contador {
             padding: 15px 35px;
             border-radius: 50px;
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(255, 255, 255, 0.04);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
@@ -231,7 +236,7 @@
         .slider-nav.prev { left: 20px; }
         .slider-nav.next { right: 20px; }
 
-        /* --- TARJETAS GLASSMORPHISM CORREGIDAS PARA MÓVIL --- */
+        /* --- TARJETAS GLASSMORPHISM CON FONDO AZULADO DE RESPALDO --- */
         section {
             padding: 40px 20px;
             display: flex;
@@ -241,9 +246,10 @@
         .card {
             max-width: 800px;
             width: 100%;
-            background: var(--glass-bg); /* Respaldo seguro oscuro */
+            /* Añadimos un tinte azul-marino translúcido para asegurar que se vea perfecto en móvil */
+            background: rgba(16, 24, 48, 0.6); 
             backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px); /* Compatible con iOS/Safari */
+            -webkit-backdrop-filter: blur(15px);
             padding: 40px;
             border-radius: 30px;
             border: 1px solid var(--glass-border);
@@ -280,7 +286,7 @@
         .card li { position: relative; margin-bottom: 15px; }
         .card li::before { content: '❤️'; position: absolute; left: -25px; font-size: 0.8rem; }
 
-        /* --- SECCIÓN INTERACTIVA DE PREGUNTAS (CRISTAL OSCURO COMPATIBLE) --- */
+        /* --- SECCIÓN INTERACTIVA DE PREGUNTAS --- */
         .quiz-title-box {
             text-align: center;
             padding: 40px 20px;
@@ -297,7 +303,7 @@
         .game-card {
             max-width: 650px;
             margin: 0 auto 40px auto;
-            background: rgba(10, 14, 23, 0.8); /* Forzado oscuro para evitar bug blanco en móviles */
+            background: rgba(16, 24, 48, 0.75); /* Azul marino semi-oscuro de respaldo */
             border: 1px solid var(--glass-border);
             border-radius: 25px;
             padding: 30px;
@@ -332,7 +338,7 @@
             align-items: center;
             gap: 12px;
             font-size: 1rem;
-            color: #ffffff; /* Letras totalmente blancas nítidas */
+            color: #ffffff;
             transition: all 0.2s;
         }
 
@@ -375,7 +381,8 @@
         @keyframes fadeInShort { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
         .saved-results-box {
-            background: rgba(10, 14, 23, 0.9);
+            background: rgba(16, 24, 48, 0.9);
+            border: 1px solid var(--glass-border);
             border-radius: 20px;
             padding: 25px;
             margin-top: 20px;
@@ -447,8 +454,10 @@
 </head>
 <body>
 
+    <!-- Fondo de estrellas globales -->
     <div id="glitch-stars"></div>
 
+    <!-- ================= VISTA 1: PÁGINA PRINCIPAL ROMÁNTICA ================= -->
     <div id="main-page" class="page active">
         <div class="hero">
             <h1>❤️ Oscar & Omar ❤️</h1>
@@ -471,6 +480,7 @@
                 <div class="slider-nav prev" onclick="cambiarSlideManual(-1)">‹</div>
                 <div class="slider-nav next" onclick="cambiarSlideManual(1)">›</div>
 
+                <!-- Tus 15 fotos -->
                 <img src="Foto1.jpeg" class="slide">
                 <img src="Foto2.jpeg" class="slide">
                 <img src="Foto3.jpeg" class="slide">
@@ -501,6 +511,7 @@
             </div>
         </section>
 
+        <!-- BOTÓN DETONADOR EXCLUSIVO PARA IR AL JUEGO NUEVO -->
         <section style="text-align: center; padding: 10px 20px;">
             <button class="btn btn-trigger" onclick="navegarA('quiz-page')">🧩 Espacio de Conexión: Dinámica para Conocernos ❤️</button>
             <br>
@@ -556,6 +567,7 @@
     </div>
 
 
+    <!-- ================= VISTA 2: SECCIÓN COMPLETAMENTE NUEVA E INTERACTIVA ================= -->
     <div id="quiz-page" class="page">
         <div class="quiz-title-box">
             <button class="btn btn-back" onclick="navegarA('main-page')">← Volver a la página principal</button>
@@ -563,8 +575,10 @@
             <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">Un espacio diseñado para responder preguntas sin prisa, revelar secretos lindos, reírnos y conocernos aún más.</p>
         </div>
 
+        <!-- FORMULARIO DE CONEXIÓN -->
         <form id="conexionForm" onsubmit="guardarFormulario(event)">
             
+            <!-- Pregunta 1 -->
             <div class="game-card">
                 <div class="game-question">1. Si tuviéramos un domingo completamente libre, sin pendientes de ningún tipo, ¿cuál sería tu plan ideal a mi lado?</div>
                 <div class="game-options-grid">
@@ -578,6 +592,7 @@
                 </div>
             </div>
 
+            <!-- Pregunta 2 -->
             <div class="game-card">
                 <div class="game-question">2. De todas las pequeñas cosas del día a día, ¿cuál es el detalle diario que más te reconforta de nuestra relación?</div>
                 <div class="game-options-grid">
@@ -591,6 +606,7 @@
                 </div>
             </div>
 
+            <!-- Pregunta 3 -->
             <div class="game-card">
                 <div class="game-question">3. ¿Qué tipo de música o canción te gustaría que escucháramos juntos con más frecuencia cuando viajamos o descansamos?</div>
                 <div class="game-options-grid">
@@ -604,6 +620,7 @@
                 </div>
             </div>
 
+            <!-- Pregunta 4 -->
             <div class="game-card">
                 <div class="game-question">4. Si tuvieras un deseo secreto para el futuro de nuestra historia de amor, ¿cuál de estos elegirías?</div>
                 <div class="game-options-grid">
@@ -616,6 +633,7 @@
                 </div>
             </div>
 
+            <!-- BOTONES DE ACCIÓN DEL JUEGO -->
             <div style="text-align: center; padding-bottom: 80px;">
                 <button type="submit" class="btn btn-love">💾 Guardar mis respuestas en nuestra base de datos</button>
             </div>
@@ -623,7 +641,7 @@
     </div>
 
     <script>
-        // --- 1. CONTROL DE NAVEGACIÓN ENTRE SECCIONES ---
+        // --- 1. CONTROL DE NAVEGACIÓN ---
         function navegarA(idPagina) {
             document.querySelectorAll('.page').forEach(pag => {
                 pag.classList.remove('active');
@@ -647,7 +665,7 @@
             }
         }
 
-        // --- 3. BASE DE DATOS LOCALSTORAGE (GUARDAR Y RECUPERAR) ---
+        // --- 3. BASE DE DATOS LOCALSTORAGE ---
         const preguntasTextos = [
             "1. Plan de domingo ideal juntos:",
             "2. Pequeño detalle diario que reconforta:",
@@ -716,7 +734,7 @@
                 htmlContent += `
                     <div class="saved-item">
                         <div class="saved-q">${item.pregunta}</div>
-                        <div class="saved-a">“${item.text ? item.text : item.respuesta}”</div>
+                        <div class="saved-a">“${item.respuesta}”</div>
                     </div>
                 `;
             });
@@ -781,7 +799,7 @@
         setInterval(actualizarContador, 1000);
         actualizarContador();
 
-        // --- 7. MEZCLA ALEATORIA Y GENERACIÓN DEL CARRUSEL ---
+        // --- 7. MEZCLA ALEATORIA Y CARRUSEL ---
         const slider = document.getElementById('mainSlider');
         let slidesArray = Array.from(slider.querySelectorAll('.slide'));
 
@@ -853,7 +871,7 @@
             "Te amo tanto que no cabría en un millón de páginas como esta ❤️",
             "De aquí hasta el último rincón del universo, ida y vuelta ❤️",
             "Te amo por lo que eres, por lo que fui contigo y por lo que seremos juntos ❤️",
-            "Eres mi pensamiento más bonito que tengo a lo largo del día ❤️",
+            "Eres el pensamiento más bonito que tengo a lo largo del día ❤️",
             "Te amo lo suficiente como para elegirte una y mil veces más ❤️",
             "Mucho más de lo que las palabras alcanzan a explicar, mi vida ❤️",
             "Te amo con una fuerza que ni el tiempo ni la distancia podrían cambiar ❤️",
